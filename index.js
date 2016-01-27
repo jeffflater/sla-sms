@@ -19,6 +19,9 @@ app.get('/sms/reply', function(request, response) {
     case 'yellow':
       message = 'thanks yellow is ok';
       break;
+    case 'red':
+      message = 'thanks red is so hot';
+      break;
   }
   var xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>'+message+'</Sms></Response>';
   response.send(xmlResponse)
