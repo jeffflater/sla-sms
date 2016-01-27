@@ -30,7 +30,7 @@ app.get('/sms/reply', function(request, response) {
       message += 'https://goo.gl/MmDCHx\n';
       break;
     case 'release':
-      message = 'task is released!';
+      message = 'Task is released!';
       break;
   }
   var xmlResponse = '';
@@ -44,7 +44,7 @@ app.get('/sms/reply', function(request, response) {
 });
 
 app.get('/sms/release', function(request, response) {
-  response.redirect('sms:3345305694?body=release!');
+  response.redirect('sms:3345305694?body=release');
 });
 
 app.listen(app.get('port'), function() {
