@@ -10,7 +10,7 @@ app.get('/', function(request, response) {
 
 app.get('/sms/reply', function(request, response) {
   response.set('Content-Type', 'text/xml');
-  var key = request.query.Body.trim();
+  var key = request.query['Body'].trim();
   var message = 'you didnt send me a color that i know of...';
   switch(key){
     case 'green':
