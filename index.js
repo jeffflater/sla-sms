@@ -10,7 +10,7 @@ app.get('/', function(request, response) {
 
 app.get('/sms/reply', function(request, response) {
   response.set('Content-Type', 'text/xml');
-  var xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>Thanks for the message. Configure your number\'s SMS URL to change this message.Reply HELP for help.Reply STOP to unsubscribe.Msg&amp;Data rates may apply.</Sms></Response>';
+  var xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>'+request.query+'</Sms></Response>';
   response.send(xmlResponse)
 });
 
