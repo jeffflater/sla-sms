@@ -5,7 +5,7 @@ app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 
 app.get('/', function(request, response) {
-  response.send('Hello World!')
+  response.send('Hello World!');
 });
 
 app.get('/sms/reply', function(request, response) {
@@ -20,19 +20,24 @@ app.get('/sms/reply', function(request, response) {
       message = 'thanks yellow is ok';
       break;
     case 'red':
-      message = 'https://goo.gl/cv1Xll\n';
+      message = '\nhttps://goo.gl/cv1Xll\n';
       message += '2110\n';
       message += 'Rays\'s Auto\n';
       message += 'Pre Renewal Docs\n';
       message += 'Flow: WS CL Renewal\n';
       message += 'Step: Process Updated Information\n';
-      message += 'https://Link.To.Release\n';
+      message += '<a href=\"sms:3345305694?body=release\">release</a>\n';
+      //message += 'sms:3345305694?body=released\n';
       break;
   }
   //var xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>'+message+'</Sms></Response>';
   var media = 'https://cloud.githubusercontent.com/assets/1641348/12624053/fd8c2d88-c4fa-11e5-9c7c-cb88e9d55f6f.png';
   var xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Message><Body>'+message+'</Body><Media>'+media+'</Media></Message></Response>';
   response.send(xmlResponse)
+});
+
+app.get('/sms/release', function(request, response) {
+  response.send('Hello World!');
 });
 
 app.listen(app.get('port'), function() {
