@@ -10,8 +10,17 @@ app.get('/', function(request, response) {
 
 app.get('/sms/reply', function(request, response) {
   response.set('Content-Type', 'text/xml');
-  var test = JSON.stringify(request.query);
-  var xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>'+test+'</Sms></Response>';
+  var key = request.query.Body.trim();
+  var message = 'you didnt send me a color that i know of...';
+  switch(key){
+    case 'green':
+      message = 'thanks i like green too';
+      break;
+    case 'yellow':
+      message = 'thanks yellow is ok';
+      break;
+  }
+  var xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>'+message+'</Sms></Response>';
   response.send(xmlResponse)
 });
 
