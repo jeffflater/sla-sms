@@ -27,11 +27,19 @@ app.get('/sms/reply', function(request, response) {
       message += 'Flow: WS CL Renewal\n';
       message += 'Step: Process Updated Information\n';
       message += 'https://goo.gl/MmDCHx\n';
+    case 'release':
+      message = 'task is released!';
       break;
   }
   //var xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>'+message+'</Sms></Response>';
   var media = 'https://cloud.githubusercontent.com/assets/1641348/12624053/fd8c2d88-c4fa-11e5-9c7c-cb88e9d55f6f.png';
-  var xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Message><Body>'+message+'</Body><Media>'+media+'</Media></Message></Response>';
+
+  var xmlResponse = '';
+  if (key === 'red') {
+    xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Message><Body>'+message+'</Body><Media>'+media+'</Media></Message></Response>';
+  }else{
+    xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>'+message+'</Sms></Response>';
+  }
   response.send(xmlResponse)
 });
 
