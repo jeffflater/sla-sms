@@ -20,7 +20,7 @@ app.get('/sms/reply', function(request, response) {
       message = 'thanks yellow is ok';
       break;
     case 'red':
-      message = '\nhttps://goo.gl/cv1Xll)\n';
+      message = '\nhttps://goo.gl/cv1Xll\n';
       message += '2110\n';
       message += 'Rays\'s Auto\n';
       message += 'Pre Renewal Docs\n';
