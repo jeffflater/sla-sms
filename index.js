@@ -26,7 +26,7 @@ app.get('/sms/reply', function(request, response) {
       message += 'Pre Renewal Docs\n';
       message += 'Flow: WS CL Renewal\n';
       message += 'Step: Process Updated Information\n';
-      message += 'sms://3345305694?body=released\n';
+      message += 'sms:3345305694?body=release\n';
       break;
   }
   //var xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>'+message+'</Sms></Response>';
@@ -36,7 +36,7 @@ app.get('/sms/reply', function(request, response) {
 });
 
 app.get('/sms/release', function(request, response) {
-  response.send('Hello World!');
+  response.redirect('sms:3345305694?body=release!');
 });
 
 app.listen(app.get('port'), function() {
