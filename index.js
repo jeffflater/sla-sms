@@ -26,7 +26,7 @@ app.get('/sms/reply', function(request, response) {
       message += 'Pre Renewal Docs\n';
       message += 'Flow: WS CL Renewal\n';
       message += 'Step: Process Updated Information\n';
-      message += '<a href=\"sms:3345305694?body=release\">release</a>\n';
+      message += 'sms:3345305694?body=release\n';
       //message += 'sms:3345305694?body=released\n';
       break;
   }
