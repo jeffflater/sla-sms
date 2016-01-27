@@ -23,7 +23,7 @@ app.get('/sms/reply', function(request, response) {
       message = 'thanks red is so hot';
       break;
   }
-  var xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>'+message+'</Sms></Response>';
+  var xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>'+message+'<Media>https://cloud.githubusercontent.com/assets/1641348/12624053/fd8c2d88-c4fa-11e5-9c7c-cb88e9d55f6f.png</Media></Sms></Response>';
   response.send(xmlResponse)
 });
 
