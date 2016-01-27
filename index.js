@@ -20,7 +20,13 @@ app.get('/sms/reply', function(request, response) {
       message = 'thanks yellow is ok';
       break;
     case 'red':
-      message = 'thanks red is so hot';
+      message = 'https://goo.gl/cv1Xll\n';
+      message += '2110\n';
+      message += 'Rays\'s Auto\n';
+      message += 'Pre Renewal Docs\n';
+      message += 'Flow: WS CL Renewal\n';
+      message += 'Step: Process Updated Information\n';
+      message += 'https://Link.To.Release\n';
       break;
   }
   //var xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>'+message+'</Sms></Response>';
