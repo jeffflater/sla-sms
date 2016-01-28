@@ -51,7 +51,8 @@ app.get('/sms/reply', function(request, response) {
 
       db.set(phone, {
         messageNumber: 0,
-        taskNumber: 1
+        taskNumber: 1,
+        isAssigning: false
       });
 
       break;
@@ -60,28 +61,61 @@ app.get('/sms/reply', function(request, response) {
     case '2':
     case '3':
 
+
+
       var destinations = smsConvo.messages[messageNumber].destinations;
       var destination;
 
+
       var newMessageNumber = 0;
-      if (key === '1') {
-        isAssigning = false;
-        newMessageNumber = 0;
-      } else if (key === '2') {
-        newMessageNumber = 1;
-      } else if (key === '3') {
-        isAssigning = true;
-        newMessageNumber = 2;
+
+      console.log(messageNumber);
+      console.log(isAssigning);
+      console.log(key);
+
+      if (key !== '1' || !isAssigning) {
+        console.log('HERE');
+        if (key === '1') {
+          isAssigning = false;
+          newMessageNumber = 0;
+        } else if (key === '2') {
+          newMessageNumber = 1;
+        } else if (key === '3') {
+          isAssigning = true;
+          newMessageNumber = 2;
+        }
+        destination = smsConvo.messages[destinations[newMessageNumber]];
+        console.log(destinations);
+        console.log(newMessageNumber);
+      } else {
+        console.log('THERE');
+        console.log(destinations);
+        console.log(newMessageNumber);
+        console.log(taskNumber);
+        if (taskNumber === 1) {
+          console.log('TEST');
+          console.log(destinations[0][0]);
+          destination = smsConvo.messages[destinations[0][0]];
+        } else if (taskNumber === 2) {
+          console.log(destinations[0][1]);
+          destination = smsConvo.messages[destinations[0][1]];
+        } else if (taskNumber === 3) {
+          console.log(destinations[0][2]);
+          destination = smsConvo.messages[destinations[0][2]];
+        }
       }
-      destination = smsConvo.messages[destinations[newMessageNumber]];
+
+
+
+      console.log(destination);
+
+      if (messageNumber === 14) {
+        isAssigning = false;
+      }
 
       var task = taskNumber;
       if (!isAssigning) {
         task = taskNumber+1;
-      }
-
-      if (destinations[newMessageNumber] === 14) {
-        isAssigning = false;
       }
 
       db.set(phone, {

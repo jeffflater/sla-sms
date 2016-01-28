@@ -81,7 +81,7 @@ var smsConvo = {
     { //14
       message: '\nNo more people with this name.\n',
       options: '\n1 - Return to task\n',
-      destinations: [0,1,4]
+      destinations: [[0,1,4]]
     }
   ]
 };
