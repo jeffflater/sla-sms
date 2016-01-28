@@ -167,7 +167,10 @@ app.get('/sms/reply', function(request, response) {
     });
 
     break;
-
+case 'heat':
+      message = 'Your heat index is 8.  You have 12 green tasks, 8 yellow tasks and 0 red tasks.';
+      hasMedia = false;
+    break;
     default:
       message = 'rebel scum...';
       hasMedia = false;
