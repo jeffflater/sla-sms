@@ -2,8 +2,8 @@ var express = require('express');
 var app = express();
 
 var JSONStore = require('json-store');
-var db = JSONStore('./index.json');
-var smsConvo = JSONStore('./convo.js');
+var db = JSONStore(__dirname+'/index.json');
+var smsConvo = require(__dirname+'/convo.js');
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
@@ -18,16 +18,23 @@ app.get('/sms/reply', function(request, response) {
   var key = request.query['Body'].trim().toLowerCase();
   var phone = request.query['From'];
 
+  var messageNumber = 0;
+  var taskNumber = 1;
 
-  db.get(phone);
-  
+  var store = db.get(phone);
 
-  db.set(phone, {
-    messageNumber: 0,
-    taskNumber: 1
-  });
+  if (!store) {
+    db.set(phone, {
+      messageNumber: messageNumber,
+      taskNumber: taskNumber
+    });
+  } else {
+    messageNumber = store.messageNumber;
+    taskNumber = store.taskNumber;
+  }
 
   var message = 'you didnt send me a color that i know of...';
+  var media = 'https://cloud.githubusercontent.com/assets/1641348/12624053/fd8c2d88-c4fa-11e5-9c7c-cb88e9d55f6f.png';
 
   switch(key){
 
@@ -41,15 +48,9 @@ app.get('/sms/reply', function(request, response) {
 
     case 'red':
 
-
-      var task = smsConvo.red.tasks[0];
-
-      message = '\n'+task.link+'\n';
-      message += task.'\n';
-      message += 'Rays\'s Auto\n';
-      message += 'Pre Renewal Docs\n';
-      message += 'Flow: WS CL Renewal\n';
-      message += 'Step: Process Updated Information\n';
+      message = smsConvo.messages[0].message;
+      message += smsConvo.messages[0].options;
+      media = smsConvo.messages[0].media;
 
       break;
 
@@ -88,7 +89,6 @@ app.get('/sms/reply', function(request, response) {
   }
   var xmlResponse = '';
   if (key === 'red') {
-    var media = 'https://cloud.githubusercontent.com/assets/1641348/12624053/fd8c2d88-c4fa-11e5-9c7c-cb88e9d55f6f.png';
     xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Message><Body>'+message+'</Body><Media>'+media+'</Media></Message></Response>';
   }else{
     xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>'+message+'</Sms></Response>';
