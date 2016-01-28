@@ -73,12 +73,15 @@ app.get('/sms/reply', function(request, response) {
       console.log(isAssigning);
       console.log(key);
 
+      var messageNumberSaved = messageNumber;
+
       if (key !== '1' || !isAssigning) {
         console.log('HERE');
         if (key === '1') {
           isAssigning = false;
           newMessageNumber = 0;
         } else if (key === '2') {
+
           newMessageNumber = 1;
         } else if (key === '3') {
           isAssigning = true;
@@ -87,7 +90,13 @@ app.get('/sms/reply', function(request, response) {
         destination = smsConvo.messages[destinations[newMessageNumber]];
         console.log(destinations);
         console.log(newMessageNumber);
+
+        messageNumberSaved = destinations[newMessageNumber]
       } else {
+
+        if (key === '1') {
+          isAssigning = false;
+        }
         console.log('THERE');
         console.log(destinations);
         console.log(newMessageNumber);
@@ -95,11 +104,14 @@ app.get('/sms/reply', function(request, response) {
         if (taskNumber === 1) {
           console.log('TEST');
           console.log(destinations[0][0]);
+          messageNumberSaved = destinations[0][0];
           destination = smsConvo.messages[destinations[0][0]];
         } else if (taskNumber === 2) {
+          messageNumberSaved = destinations[0][1];
           console.log(destinations[0][1]);
           destination = smsConvo.messages[destinations[0][1]];
         } else if (taskNumber === 3) {
+          messageNumberSaved = destinations[0][2];
           console.log(destinations[0][2]);
           destination = smsConvo.messages[destinations[0][2]];
         }
@@ -119,7 +131,7 @@ app.get('/sms/reply', function(request, response) {
       }
 
       db.set(phone, {
-        messageNumber: destinations[newMessageNumber],
+        messageNumber: messageNumberSaved,
         taskNumber: task,
         isAssigning: isAssigning
       });
