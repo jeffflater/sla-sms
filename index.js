@@ -20,75 +20,116 @@ app.get('/sms/reply', function(request, response) {
 
   var messageNumber = 0;
   var taskNumber = 1;
+  var isAssigning = false;
 
   var store = db.get(phone);
 
   if (!store) {
     db.set(phone, {
       messageNumber: messageNumber,
-      taskNumber: taskNumber
+      taskNumber: taskNumber,
+      isAssigning: isAssigning
     });
   } else {
     messageNumber = store.messageNumber;
     taskNumber = store.taskNumber;
+    isAssigning = store.isAssigning;
   }
 
   var message = 'you didnt send me a color that i know of...';
   var media = 'https://cloud.githubusercontent.com/assets/1641348/12624053/fd8c2d88-c4fa-11e5-9c7c-cb88e9d55f6f.png';
+  var hasMedia = false;
 
   switch(key){
-
-    // case 'green':
-    //   message = 'thanks i like green too';
-    //   break;
-    //
-    // case 'yellow':
-    //   message = 'thanks yellow is ok';
-    //   break;
 
     case 'red':
 
       message = smsConvo.messages[0].message;
       message += smsConvo.messages[0].options;
       media = smsConvo.messages[0].media;
+      hasMedia = true;
+
+      db.set(phone, {
+        messageNumber: 0,
+        taskNumber: 1
+      });
 
       break;
 
-    /*
-    when its one it will do the following:
-     - will always do something and take you to the next task
-    */
     case '1':
-    break;
-
-    /*
-    when its one it will do the following:
-     - will always do something and take you to the next person or task
-    */
     case '2':
-    break;
-
-    /*
-    when its one it will do the following:
-     - will always take you to the assign person path
-    */
     case '3':
+
+      var destinations = smsConvo.messages[messageNumber].destinations;
+      var destination;
+
+      var newMessageNumber = 0;
+      if (key === '1') {
+        isAssigning = false;
+        newMessageNumber = 0;
+      } else if (key === '2') {
+        newMessageNumber = 1;
+      } else if (key === '3') {
+        isAssigning = true;
+        newMessageNumber = 2;
+      }
+      destination = smsConvo.messages[destinations[newMessageNumber]];
+
+      var task = taskNumber;
+      if (!isAssigning) {
+        task = taskNumber+1;
+      }
+
+      if (destinations[newMessageNumber] === 14) {
+        isAssigning = false;
+      }
+
+      db.set(phone, {
+        messageNumber: destinations[newMessageNumber],
+        taskNumber: task,
+        isAssigning: isAssigning
+      });
+
+      message = destination.message;
+      if (destination.options) {
+        message += destination.options;
+      }
+      if (destination.media) {
+        media = destination.media;
+        hasMedia = true;
+      } else {
+        hasMedia = false;
+      }
+
     break;
 
-    /*
-    when its one it will do the following:
-     - will take you to the  second step in the person path (is bob buel the right person)
-    */
-    case 'bob':
+    case 'luke':
+
+
+    var destinations = smsConvo.messages[messageNumber].destinations;
+    var destination =  smsConvo.messages[destinations[0]];
+
+    message = destination.message;
+    if (destination.options) {
+      message += destination.options;
+    }
+
+    db.set(phone, {
+      messageNumber: destinations[0],
+      taskNumber: taskNumber,
+      isAssigning: isAssigning
+    });
+
     break;
 
-    case 'release':
-      message = 'Task is released!';
-      break;
+    default:
+      message = 'rebel scum...';
+      hasMedia = false;
+    break;
 
   }
   var xmlResponse = '';
-  if (key === 'red') {
+  if (hasMedia) {
     xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Message><Body>'+message+'</Body><Media>'+media+'</Media></Message></Response>';
   }else{
     xmlResponse = '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>'+message+'</Sms></Response>';

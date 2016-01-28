@@ -47,13 +47,16 @@ var smsConvo = {
     },
     //ending
     { //7
-      message: '\nYou have no more tasks.\n'
+      message: '\nYou have no more tasks.\n',
+      destinations: [0]
     },
     { //8
-      message: '\nYour task was released, you have no more tasks.\n'
+      message: '\nYour task was released, you have no more tasks.\n',
+      destinations: [0]
     },
     { //9
-      message: '\nYour task was assigned, you have no more tasks.\n'
+      message: '\nYour task was assigned, you have no more tasks.\n',
+      destinations: [0]
     },
     //assigned to
     { //10
