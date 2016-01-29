@@ -28,19 +28,19 @@ var smsConvo = {
     },
     //task3
     { //4
-      message: '\nhttps://goo.gl/h98YOI\n2110\nBrian Evans\nPlease Follow Up\nFlow: UW_Ne Business\nStep: Mail Policy\n',
+      message: '\nhttps://goo.gl/gUckxE\n2110\nBrian Evans\nPlease Follow Up\nFlow: UW_Ne Business\nStep: Mail Policy\n',
       media: 'https://cloud.githubusercontent.com/assets/1641348/12625766/3215c142-c503-11e5-8c9b-cbefa0c482b3.png',
       options: '\n1 - Go to next\n2 - Relase task\n3 - Assign To',
       destinations: [7,8,10]
     },
     { //5
-      message: '\nYour task was released, here is your next task:\nhttps://goo.gl/h98YOI\n2110\nBrian Evans\nPlease Follow Up\nFlow: UW_Ne Business\nStep: Mail Policy\n',
+      message: '\nYour task was released, here is your next task:\nhttps://goo.gl/gUckxE\n2110\nBrian Evans\nPlease Follow Up\nFlow: UW_Ne Business\nStep: Mail Policy\n',
       media: 'https://cloud.githubusercontent.com/assets/1641348/12625766/3215c142-c503-11e5-8c9b-cbefa0c482b3.png',
       options: '\n1 - Go to next\n2 - Relase task\n3 - Assign To',
       destinations: [7,8,10]
     },
     { //6
-      message: '\nYour task was assgined, here is your next task:\nhttps://goo.gl/h98YOI\n2110\nBrian Evans\nPlease Follow Up\nFlow: UW_Ne Business\nStep: Mail Policy\n',
+      message: '\nYour task was assgined, here is your next task:\nhttps://goo.gl/gUckxE\n2110\nBrian Evans\nPlease Follow Up\nFlow: UW_Ne Business\nStep: Mail Policy\n',
       media: 'https://cloud.githubusercontent.com/assets/1641348/12625766/3215c142-c503-11e5-8c9b-cbefa0c482b3.png',
       options: '\n1 - Go to next\n2 - Relase task\n3 - Assign To',
       destinations: [7,8,10]
